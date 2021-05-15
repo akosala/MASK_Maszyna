@@ -1,0 +1,8 @@
+{% extends "mask/obsluga.html" %}
+{% block content %}
+{% if request.user.is_authenticated %}
+Hello {{ request.user.username }}.
+{% else %}
+Hello Guest
+{% endif %}
+{% endblock %}
