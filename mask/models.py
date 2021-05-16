@@ -12,8 +12,9 @@ class XXX_Kontrah(models.Model):
     class Meta:
         verbose_name = "XXX_Kontrahent"
         verbose_name_plural = "XXX_Kontrahenci"
-
-
+class Pracownik(models.Model):
+    #pracownik_id=models.ForeignKey(User,on_delete=models.CASCADE)
+    pracownik=models.CharField(verbose_name='PracownikName',max_length=200)
 
 class Kontrah(models.Model):
     id_kontrahent = models.IntegerField()

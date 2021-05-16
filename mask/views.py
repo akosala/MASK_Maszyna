@@ -1,16 +1,13 @@
+from datetime import timezone
+
 from django.shortcuts import render
-from django.http import Http404
-from django.utils import timezone
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse,HttpResponseRedirect
-from django.template import loader
 from django.urls import reverse
-from django.views import generic
-#import marcin
 from django.contrib.auth import login, logout
 from .models import US,ZUS,Kontrah
 from django.contrib import messages
 from django.shortcuts import redirect
+from django.forms import inlineformset_factory
+from .forms import ZusForm,UsForm
 
 #def index(request):
  #   return HttpResponse("Helo, this will be the mask Porojekt for the Meritum Accounting Office")
@@ -31,10 +28,10 @@ def kontrah_add(request):
 
     return render(request, 'mask/kontrah.html')
 
-def zus(request):
+"""def zus(request):
     zus = ZUS.objects.order_by('c')[:5]
     contex = {'zus': zus, }
-    return render(request, 'mask/zus.html', contex)
+    return render(request, 'mask/zus.html', contex)"""
 
 
 def loguj(request):
@@ -56,20 +53,37 @@ def wyloguj(request):
     logout(request)
     messages.info(request, "Zostałeś wylogowany!")
     return redirect(reverse('mask:index'))
-"""
-def ZUS(request, pk):
-    Zus_add = inlineformset_factory(Customer, Order, fields=('product', 'status'), extra=10 )
-    customer = Customer.objects.get(id=pk)
-    formset = Zus_add(queryset=ZUS.objects.none(),instance=kontrah)
- 
-    if request.method == 'POST':
-        
-        formset = OrderFormSet(request.POST, instance=kontrah)
-        if formset.is_valid():
-            formset.save()
-            return redirect('/')
-
-    context = {'form':formset}
-    return render(request, 'accounts/order_form.html', context)"""
 
 
+"""def zusaddoperations(request):
+    form = ZusForm()
+    return render(request, 'mask/zus.html' , {'form': form}
+                  )"""
+
+
+
+def zusaddoperations(request):
+    if request.method == "POST":
+        form = ZusForm(request.POST)
+        if form.is_valid():
+            zus_add = form.save(commit=False)
+            zus_add.pracownik = request.user
+            zus_add.date = timezone.now()
+            zus_add.save()
+            return redirect('post_detail', pk=zus_add.pk)
+    else:
+        form = ZusForm()
+    return render(request, 'mask/zus.html', {'form': form})
+
+def usaddoperations(request):
+    if request.method == "POST":
+        form = UsForm(request.POST)
+        if form.is_valid():
+            us_add = form.save(commit=False)
+            us_add.pracownik = request.user
+            us_add.date = timezone.now()
+            us_add.save()
+            return redirect('post_detail', pk=us_add.pk)
+    else:
+        form = UsForm()
+    return render(request, 'mask/us.html', {'form': form})
