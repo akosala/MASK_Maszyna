@@ -1,9 +1,19 @@
 {% extends "mask/obsluga.html" %}
+{% load widget_tweaks %}
 {% block content %}
-    <h2>Rejestracja danych ZUS</h2>
-    <form action="." method="POST" class="ZUS-forms">
-       <h6> {{ form.as_p }} {% csrf_token %}
-        </h6>
-        <h6><button type="submit" class="btn btn-outline-dark">Zapisz</button></h6>
+<h2>Rejestracja danych ZUS</h2>
+<form  method="POST" class="ZUS-forms">
+    <h3><table>
+     {% csrf_token %}
+        {% for f in form %}
+      <tr> <td> <h8>{{ f.name }}</h8></td> <td><h8>{{ f }}</h8></td> </tr>
+        {% endfor %}
+    </table></h3>
+
+            <h3><button type="submit" class="btn btn-outline-dark">Zapisz</button></h3>
+    {% if latest.pk %}
+    <p class="showmore"><a href="{% url 'mask: detail ' pk=latest.pk %}">Show more</a></p>
+    {% endif %}
     </form>
+
 {% endblock %}

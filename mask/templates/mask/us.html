@@ -1,9 +1,22 @@
 {% extends "mask/obsluga.html" %}
 {% block content %}
+
+
     <h2>Rejestracja danych US</h2>
     <form action="." method="POST" class="US-forms">
-       <h6> {{ form.as_p }} {% csrf_token %}
-        </h6>
-        <h6><button type="submit" class="btn btn-outline-dark">Zapisz</button></h6>
+{% csrf_token %}
+
+        <h3><table>
+        {% for f in form %}
+      <tr> <td> <h8>{{ f.name }}</h8></td> <td><h8>{{ f }}</h8></td> </tr>
+        {% endfor %}
+        </table></h3>
+            <h3><button type="submit" class="btn btn-outline-dark">Zapisz </button></h3>
+
+
+
+
+
+
     </form>
 {% endblock %}

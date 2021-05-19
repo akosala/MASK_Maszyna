@@ -1,5 +1,20 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
+from django.utils import timezone
+
+
+
+
+
+def content_file_name(instance, filename):
+    return '/'.join(['media', instance.user.username, filename])
+
+class Content(models.Model):
+    name = models.CharField(max_length=200)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    file = models.FileField(upload_to=content_file_name)
+
 
 
 class XXX_Kontrah(models.Model):
@@ -16,6 +31,17 @@ class XXX_Kontrah(models.Model):
         verbose_name_plural = "XXX_Kontrahenci"
 
 
+class OkresRozrachunkowy(models.Model):
+
+    miesiac = models.CharField(verbose_name='miesiac', max_length=50)
+
+    def __str__(self):
+        return self.miesiac
+
+    class Meta:
+        verbose_name = "Okres Rozrachunkowy"
+        verbose_name_plural = "Okresy Rozrachunkowe"
+
 class Slownik1(models.Model):
 
     wartosc=models.CharField(verbose_name='Wartosc', max_length=50)
@@ -24,8 +50,8 @@ class Slownik1(models.Model):
         return self.wartosc
 
     class Meta:
-        verbose_name = "Wartość"
-        verbose_name_plural = "Warości"
+        verbose_name = "Slownik1"
+        verbose_name_plural = "Slownik1"
 
 
 class Slownik2(models.Model):
@@ -36,8 +62,8 @@ class Slownik2(models.Model):
         return self.wartosc
 
     class Meta:
-        verbose_name = "Wartość"
-        verbose_name_plural = "Warości"
+        verbose_name = "Slownik2"
+        verbose_name_plural = "Slownik2"
 
 
 class Pracownik_pow(models.Model):
@@ -48,8 +74,8 @@ class Pracownik_pow(models.Model):
         return self.pracownik
 
     class Meta:
-        verbose_name = "Pracownik"
-        verbose_name_plural = "Pracownicy"
+        verbose_name = "Pracownik Powiązany"
+        verbose_name_plural = "Pracownicy Powiązani"
 
 
 class Kontrah(models.Model):
@@ -77,10 +103,9 @@ class ZUS(models.Model):
     RACH = models.ForeignKey(Slownik2,on_delete=models.CASCADE)
     czas_realizacj = models.CharField(max_length=100)
     date = models.DateTimeField(auto_now_add=True)
-    data_obowiazywania = models.DateField()
+    miesiac = models.ForeignKey(OkresRozrachunkowy, on_delete=models.CASCADE)
 
     def __str__(self):
-
         return self.kontrahent
 
     class Meta:
@@ -88,9 +113,10 @@ class ZUS(models.Model):
         verbose_name_plural = "ZUS"
 
 
+
 class US(models.Model):
 
-    kontrahent = models.ForeignKey(Kontrah,on_delete=models.CASCADE)
+    kontrahent = models.ForeignKey(Kontrah,verbose_name='Kontrahenr',on_delete=models.CASCADE)
     pracownik = models.ForeignKey(User,on_delete=models.CASCADE)
     ilosc_dokumentow = models.IntegerField()
     okres_Pit_Cit = models.CharField(max_length=100)
@@ -98,8 +124,11 @@ class US(models.Model):
     weryfikacja_rej_Vat = models.ForeignKey(Slownik1,on_delete=models.CASCADE)
     Vat_JPK = models.CharField(max_length=100)
     czas_realizacj = models.CharField(max_length=100)
-    date = models.DateTimeField(auto_now_add=True)
-    data_obowiazywania = models.DateField()
+    date = models.DateTimeField(default=timezone.now)
+    miesiac = models.ForeignKey(OkresRozrachunkowy, on_delete=models.CASCADE)
+
+
+
 
     def __str__(self):
         return self.kontrahent

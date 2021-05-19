@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'widget_tweaks',
+
+
 ]
 
 MIDDLEWARE = [
@@ -76,10 +79,7 @@ WSGI_APPLICATION = 'MASK_PROJEKT.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-#DATABASES = {
-##       'NAME': BASE_DIR / 'db.sqlite3',
- #   }
-#}
+
 
 DATABASES = {
 
@@ -118,6 +118,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
 
 
 # Internationalization
