@@ -16,12 +16,20 @@ from .forms import DocumentForm
  #   return HttpResponse("Helo, this will be the mask Porojekt for the Meritum Accounting Office")
 
 
+"""def widokzus(request):
+    device = ZUS.objects.select_related('mask_zus', 'mask_kontrah','mask_slownik2','mask_slownik1').get(46)
+    dane = device.devices_data_set.all()
+    return render(request, 'widokzus.html',{'device': device, 'dane': dane})"""
 
 
 def widokzus(request):
-    latest_question_list = ZUS.objects.order_by('zus10')[:5]
-    output = ', '.join([q.zus10 for q in latest_question_list])
-    return HttpResponse(output)
+  ##  latest_question_list = ZUS.objects.order_by('zus10')
+    zus_dane =[p.id for p in ZUS.objects.all()]
+    #zus_dane =  ZUS.objects.all()
+    kontrah_dane=Kontrah.objects.all()
+
+    razem = (zus_dane , '   dodany ostatni rekord w ZUS ')
+    return HttpResponse(razem)
 
 
 
