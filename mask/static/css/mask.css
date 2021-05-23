@@ -1,20 +1,31 @@
+
 body {
     background-color: #f0aca8;
-
+    font-family:'Lato';
 
 }
 
-h1,h2,h3,h6,h1 a, h2 a{
 
+h1,h2,h3,h4,h6,h1 a, h2 a{
     margin-top:20px;
     padding:20px;
+    font-family:'Lato';
+}
+h5{
+margin-top:20px;
+    padding:20px;
+    font-family:'Lato';
+}
+h9{
 
-
+font-family:'Lato';
 }
 h6{
 padding-right:250px;
+font-family:'Lato';
 }
 a{
 color: black;
 text-decoration:none;
+font-family:'Lato';
 }

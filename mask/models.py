@@ -44,10 +44,10 @@ class OkresRozrachunkowy(models.Model):
 
 class Slownik1(models.Model):
 
-    wartosc=models.CharField(verbose_name='Wartosc', max_length=50)
+    wartosc1=models.CharField(verbose_name='Wartosc', max_length=50)
 
     def __str__(self):
-        return self.wartosc
+        return self.wartosc1
 
     class Meta:
         verbose_name = "Slownik1"
@@ -56,10 +56,10 @@ class Slownik1(models.Model):
 
 class Slownik2(models.Model):
 
-    wartosc=models.CharField(verbose_name='Wartosc', max_length=50)
+    wartosc2=models.CharField(verbose_name='Wartosc', max_length=50)
 
     def __str__(self):
-        return self.wartosc
+        return self.wartosc2
 
     class Meta:
         verbose_name = "Slownik2"
@@ -85,7 +85,8 @@ class Kontrah(models.Model):
     pracownik_odpowiedzialnv = models.ForeignKey(Pracownik_pow, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.DL_kontrahent
+
+        return str(self.DL_kontrahent)
 
     class Meta:
         verbose_name = "Kontrahent"
@@ -106,7 +107,7 @@ class ZUS(models.Model):
     miesiac = models.ForeignKey(OkresRozrachunkowy, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.kontrahent
+        return str (self.kontrahent)
 
     class Meta:
         verbose_name = "ZUS"
@@ -131,7 +132,7 @@ class US(models.Model):
 
 
     def __str__(self):
-        return self.kontrahent
+        return str(self.kontrahent)
 
     class Meta:
         verbose_name = "US"

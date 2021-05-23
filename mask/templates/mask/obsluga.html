@@ -11,15 +11,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Fascinate&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/mask.css' %}">
-    <link rel = "icon" href = "">
+
     <title>MASK</title>
 </head>
 
 <body>
 <!-- Nawigacja po stronie -->
-<nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
+
+<nav class="navbar navbar-expand-lg  navbar-light bg-light">
+    <p class="h9"><img src="{% static 'logo.png' %}"    width="160" height="70"  background-color="white"  ></p>
     <div class="container-fluid">
-      <a class="navbar-brand" href="https://biuromeritum.pl/kontakt.html"> Biuro Rachunkowe Meritum</a>
+
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -41,7 +43,7 @@
             <a class="nav-link active"  href="{% url 'mask:widokzus'%}">Zestawienia</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="#">O MASK</a>
+            <a class="nav-link active" href="{% url 'mask:omask'%}">O MASK</a>
           </li>
             <li class="nav-item">
             <a class="nav-link active" href="{% url 'mask:loguj'%}">Logowanie</a>
@@ -60,7 +62,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
     </script>
-<img src="{% static 'logo.png' %}" width="200" height="150" left ="200" right="100" >
+
 </body>
 
 </html>

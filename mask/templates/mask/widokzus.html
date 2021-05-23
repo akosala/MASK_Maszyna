@@ -2,6 +2,25 @@
 {% load widget_tweaks %}
 {% block content %}
 {% csrf_token %}
-<h3>wydruk</h3>
+<h3>Wydruk Zbiorczy  wprowadzonych wszystkich danych ZUS</h3>
+<style> td { border: 2px solid black;width: 150px; height: 50px; text-align: center; } </style>
 
+
+{% for devices in device %}
+    <div>
+         <h6><p>ID: {{devices.id}}&nbsp;&nbsp;&nbsp; Dodano : {{ devices.date }}&nbsp;&nbsp;&nbsp;&nbsp;  Dla Firmy :  {{ devices }}&nbsp;&nbsp;&nbsp;&nbsp;    Dane za miesiąc  :  {{ devices.miesiac}} </p></h6>
+        <h4><table>
+
+        <tr> <td>Zus 10:</td>    <td>Zus 15:</td>   <td>Pit 4:</td>  <td>LP:</td>  <td>RACH:</td>  <td>Pracownik</td>  <td>Czas realizacj:</td>
+        </tr>
+            <tr><td>{{ devices.zus10|linebreaksbr }}</td><td>{{ devices.zus15|linebreaksbr }}</td><td>{{ devices.PIT_4|linebreaksbr }}</td><td>{{ devices.LP|linebreaksbr }}</td>
+            <td>{{ devices.RACH|linebreaksbr }}</td><td>{{ devices.pracownik|linebreaksbr }}</td><td>{{ devices.czas_realizacj|linebreaksbr }}</td>
+            </tr>
+        </table></h4>
+
+
+    </div>
+
+{% csrf_token %}
+{% endfor %}
 {% endblock %}

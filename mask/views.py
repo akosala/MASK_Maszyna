@@ -1,27 +1,25 @@
 from datetime import datetime,timezone
-from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.contrib.auth import login, logout
 from .models import US,ZUS,Kontrah
 from django.contrib import messages
 from django.shortcuts import redirect
-from django.forms import inlineformset_factory
 from .forms import ZusForm,UsForm
 from .models import Content
 from .forms import DocumentForm
-
+from .marcin import marcin
 #from django.shortcuts import render_to_response
 #def index(request):
  #   return HttpResponse("Helo, this will be the mask Porojekt for the Meritum Accounting Office")
 
 
-"""def widokzus(request):
-    device = ZUS.objects.select_related('mask_zus', 'mask_kontrah','mask_slownik2','mask_slownik1').get(46)
-    dane = device.devices_data_set.all()
-    return render(request, 'widokzus.html',{'device': device, 'dane': dane})"""
+def widokzus(request):
+    device = ZUS.objects.prefetch_related       #select_related
+    ('mask_zus', 'mask_kontrah','mask_slownik2','mask_slownik1','mask_lp','mask_rach','mask_pracownik','mask_okresrozrachunkowy').__getitem__(1)
+    return render(request,'mask/widokzus.html',{'device': device})
 
-
+"""
 def widokzus(request):
   ##  latest_question_list = ZUS.objects.order_by('zus10')
     zus_dane =[p.id for p in ZUS.objects.all()]
@@ -29,7 +27,7 @@ def widokzus(request):
     kontrah_dane=Kontrah.objects.all()
 
     razem = (zus_dane , '   dodany ostatni rekord w ZUS ')
-    return HttpResponse(razem)
+    return HttpResponse(razem)"""
 
 
 
@@ -43,15 +41,21 @@ def home(request):
 
     return render(request, 'mask/index.html')
 
+def omask(request):
+
+    return render(request, 'mask/omask.html')
+
 def kontrah_add(request):
-    if request.method == 'POST':
-
-        form = DocumentForm(request.POST, request.FILES)
+    """if request.method == 'POST':
+        form = ZusForm(request.POST)
         if form.is_valid():
-            newdoc = Content(docfile=request.FILES['docfile'])
-            newdoc.save()
+            add = form.save(commit=False)
+            marcin.Marcin.import_file()
+            add.save()
+         return render(request, 'mask/detailzus.html')
+        else:
+            form = ZusForm()"""
     return render(request, 'mask/kontrah.html')
-
 
 
 

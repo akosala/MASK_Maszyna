@@ -14,4 +14,4 @@ class Marcin():
 
     def import_file(self):
 
-        return 'ok'
+        return (print ('ok'))
