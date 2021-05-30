@@ -3,10 +3,6 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils import timezone
 
-
-
-
-
 def content_file_name(instance, filename):
     return '/'.join(['media', instance.user.username, filename])
 
@@ -95,7 +91,7 @@ class Kontrah(models.Model):
 
 class ZUS(models.Model):
 
-    kontrahent = models.ForeignKey(Kontrah,on_delete=models.CASCADE)
+    kontrahent = models.ForeignKey(Kontrah,verbose_name="Kontrahent",on_delete=models.CASCADE)
     pracownik = models.ForeignKey(User,on_delete=models.CASCADE)
     zus10 = models.CharField(max_length=100)
     zus15 = models.CharField(max_length=100)
