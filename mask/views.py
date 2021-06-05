@@ -46,6 +46,19 @@ def omask(request):
     return render(request, 'mask/omask.html')
 
 def kontrah_add(request):
+    if request.method == "POST":
+        data = marcin.ImpData('mask/dane/Lista_kontrah.txt', 'mask/dane/data.csv')
+        data.impexp()
+        conn = marcin.Load('mask/marcin/connection.txt', 'con', 'mask/dane/data.csv')
+        conn.load_data()
+        data.clean()
+        ##marcin.Marcin
+       # add.save()
+        #return render(request, 'mask/detailzus.html')
+    #else:
+    #    form = ZusForm()
+
+
     """if request.method == 'POST':
         form = ZusForm(request.POST)
         if form.is_valid():

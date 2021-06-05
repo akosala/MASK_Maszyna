@@ -1,10 +1,12 @@
 {% extends "mask/obsluga.html" %}
 {% block content %}
-<h2> Import Kontrahentów </h2>
+
     <h6>
 
-<form>
- <button type="submit" class="btn btn-outline-dark"  method="POST" >Import pilku </button>
+<form method="POST">
+    <h2> Import Kontrahentów </h2>
+ <button type="submit" class="btn btn-outline-dark"  >Import pilku </button>
+    {% csrf_token %}
 </form>
 
 </h6>

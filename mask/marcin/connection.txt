@@ -1,0 +1,6 @@
+[con]
+host = localhost
+dbname = dbmask
+user = postgres
+password = Qwerty!234%
+
