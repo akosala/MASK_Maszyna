@@ -1,0 +1,7 @@
+{% extends "mask/obsluga.html" %}
+{% load widget_tweaks %}
+{% block content %}
+{% csrf_token %}
+<h3>Dodano Wpis w ilości : {{klientadd}} </h3>
+<h3><a class="nav-link active" href="{% url 'mask:kontrah_add'%}">Powrót</a></h3>
+{% endblock %}
